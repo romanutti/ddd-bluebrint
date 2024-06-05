@@ -15,14 +15,6 @@ public class TournamentRepositoryImpl implements TournamentRepository {
     }
 
     @Override
-    public Tournament findById(Long id) {
-        return null;
-        // return jpaTournamentRepository.findById(id)
-        //         .map(this::toDomain)
-        //         .orElseThrow(() -> new RuntimeException("Tournament not found"));
-    }
-
-    @Override
     public void save(Tournament tournament) {
         // jpaTournamentRepository.save(toEntity(tournament));
     }

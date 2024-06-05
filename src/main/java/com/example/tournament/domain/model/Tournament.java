@@ -1,56 +1,35 @@
 package com.example.tournament.domain.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.tournament.domain.event.EventPublisher;
+import com.example.tournament.domain.event.ParticipantRegisteredEvent;
+import com.example.tournament.domain.repository.TournamentRepository;
+
+import java.util.UUID;
 
 public class Tournament {
-    private Long id;
-    private String name;
-    private List<Participant> participants;
-    private List<Long> matchIds;
+    private final TournamentRepository tournamentRepository;
+    private final EventPublisher eventPublisher;
+    private final UUID id;
+
+    private Participants participants;
     private TournamentStatus status;
 
-    public Tournament(Long id, String name) {
-        this.id = id;
-        this.name = name;
-        this.participants = new ArrayList<>();
-        this.matchIds = new ArrayList<>();
-        this.status = TournamentStatus.CREATED;
+    public Tournament(TournamentRepository tournamentRepository, EventPublisher eventPublisher) {
+        this.tournamentRepository = tournamentRepository;
+        this.eventPublisher = eventPublisher;
+        this.id = UUID.randomUUID();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Participant> getParticipants() {
-        return participants;
-    }
-
-    public List<Long> getMatchIds() {
-        return matchIds;
-    }
-
-    public TournamentStatus getStatus() {
-        return status;
-    }
-
-    public void registerParticipant(Participant participant) {
-        this.participants.add(participant);
-    }
-
-    public void addMatch(Long matchId) {
-        this.matchIds.add(matchId);
-    }
-
-    public void finalizeTournament(String winner) {
-        if (status == TournamentStatus.COMPLETED) {
-            throw new IllegalStateException("Tournament has already been finalized.");
+    public void createTournament(Participants participants) {
+        if (participants.getParticipantIds().isEmpty()) {
+            throw new IllegalArgumentException("Participants should be available.");
         }
-        this.status = TournamentStatus.COMPLETED;
-        // Set the winner in some manner, e.g., a field or a dedicated method.
+
+        this.participants = participants;
+        this.status = TournamentStatus.CREATED;
+
+        tournamentRepository.save(this);
+
+        participants.getParticipantIds().forEach(participantId -> eventPublisher.publishEvent(new ParticipantRegisteredEvent(this.id, participantId)));
     }
 }

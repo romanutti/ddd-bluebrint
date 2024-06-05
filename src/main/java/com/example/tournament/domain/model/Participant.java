@@ -1,15 +1,17 @@
 package com.example.tournament.domain.model;
 
+import java.util.UUID;
+
 public class Participant {
-    private final Long id;
+    private final UUID id;
     private Name name;
 
-    public Participant(Long id, Name name) {
+    public Participant(UUID id, Name name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
