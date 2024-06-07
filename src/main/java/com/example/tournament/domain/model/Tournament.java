@@ -1,35 +1,24 @@
 package com.example.tournament.domain.model;
 
-import com.example.tournament.domain.event.EventPublisher;
-import com.example.tournament.domain.event.ParticipantRegisteredEvent;
-import com.example.tournament.domain.repository.TournamentRepository;
-
 import java.util.UUID;
 
+// Contains business logic and no technical things such as storing data and publishing event
 public class Tournament {
-    private final TournamentRepository tournamentRepository;
-    private final EventPublisher eventPublisher;
     private final UUID id;
-
-    private Participants participants;
     private TournamentStatus status;
 
-    public Tournament(TournamentRepository tournamentRepository, EventPublisher eventPublisher) {
-        this.tournamentRepository = tournamentRepository;
-        this.eventPublisher = eventPublisher;
+    private Participants participants;
+
+    public Tournament() {
         this.id = UUID.randomUUID();
+        this.status = TournamentStatus.CREATED;
     }
 
-    public void createTournament(Participants participants) {
-        if (participants.getParticipantIds().isEmpty()) {
-            throw new IllegalArgumentException("Participants should be available.");
-        }
+    public UUID getId() {
+        return id;
+    }
 
+    public void addParticipants(Participants participants){
         this.participants = participants;
-        this.status = TournamentStatus.CREATED;
-
-        tournamentRepository.save(this);
-
-        participants.getParticipantIds().forEach(participantId -> eventPublisher.publishEvent(new ParticipantRegisteredEvent(this.id, participantId)));
     }
 }

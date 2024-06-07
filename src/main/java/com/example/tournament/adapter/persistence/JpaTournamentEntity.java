@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class TournamentEntity {
+public class JpaTournamentEntity {
     @Id
     private Long id;
 

@@ -1,15 +1,15 @@
-package com.example.tournament.application.event;
+package com.example.tournament.adapter.event;
 
 import com.example.tournament.domain.event.EventPublisher;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EventPublisherImpl implements EventPublisher {
+public class SpringEventPublisher implements EventPublisher {
 
     private final ApplicationEventPublisher eventPublisher;
 
-    public EventPublisherImpl(ApplicationEventPublisher eventPublisher) {
+    public SpringEventPublisher(ApplicationEventPublisher eventPublisher) {
         this.eventPublisher = eventPublisher;
     }
 

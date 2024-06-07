@@ -2,8 +2,8 @@ package com.example.tournament.application.service;
 
 import com.example.tournament.domain.event.EventPublisher;
 import com.example.tournament.domain.model.Participants;
-import com.example.tournament.domain.model.Tournament;
 import com.example.tournament.domain.repository.TournamentRepository;
+import com.example.tournament.usecase.CreateTournament;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +19,7 @@ public class TournamentService {
 
     @Transactional
     public void createNewTournament(Participants participants) {
-        Tournament tournament = new Tournament(tournamentRepository, eventPublisher);
-        tournament.createTournament(participants);
+        CreateTournament createTournament = new CreateTournament(tournamentRepository, eventPublisher);
+        createTournament.execute(participants);
     }
 }

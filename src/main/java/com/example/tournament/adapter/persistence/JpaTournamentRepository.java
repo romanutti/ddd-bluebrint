@@ -5,10 +5,10 @@ import com.example.tournament.domain.repository.TournamentRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TournamentRepositoryImpl implements TournamentRepository {
+public class JpaTournamentRepository implements TournamentRepository {
     // private final JpaTournamentRepository jpaTournamentRepository;
 
-    public TournamentRepositoryImpl(
+    public JpaTournamentRepository(
             // JpaTournamentRepository jpaTournamentRepository
     ) {
         // this.jpaTournamentRepository = jpaTournamentRepository;
@@ -17,15 +17,5 @@ public class TournamentRepositoryImpl implements TournamentRepository {
     @Override
     public void save(Tournament tournament) {
         // jpaTournamentRepository.save(toEntity(tournament));
-    }
-
-    private Tournament toDomain(TournamentEntity entity) {
-        // convert TournamentEntity to Tournament domain object
-        return null;
-    }
-
-    private TournamentEntity toEntity(Tournament tournament) {
-        // convert Tournament domain object to TournamentEntity
-        return null;
     }
 }
