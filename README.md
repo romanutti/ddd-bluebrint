@@ -18,3 +18,4 @@ For further reference, please consider the following sections:
 
 * [Camp track "Domain-Driven Design 101"](https://confluence.zuehlke.com/display/ZGSC/Domain-Driven+Design+101)
 * [Book "Implementing Domain Driven Design" by Vaughn Vernon](https://learning.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/)
+* [Event Storming Tutorial](https://www.youtube.com/watch?v=vVZl3pfwyfM&t=4s) and [EventStorming: Collaborative Learning for Complex Domains](https://www.youtube.com/watch?v=vf6x0i2d9VE)
